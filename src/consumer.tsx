@@ -157,6 +157,9 @@ export function SmartCartScreen() {
         <span>جمع سبد ماهانه ({toFa(MONTHLY_CART_COUNT)} قلم)</span>
         <b>{money(MONTHLY_CART_TOTAL)} ت</b>
       </div>
+      <div style={{ textAlign: 'center', marginTop: 8 }}>
+        <Chip tone="green">🚚 ارسال رایگان اوکالا — سفارش بالای ۱۰۰ هزار تومان</Chip>
+      </div>
     </>
   )
 }
@@ -326,7 +329,7 @@ export function TapsiScreen() {
           ✅ سفارش خرید ثبت شد <Chip tone="green">در حال آماده‌سازی</Chip>
         </div>
         <small style={{ color: 'var(--ink-2)', fontSize: 12.5 }}>
-          تحویل اوکالا: پنجشنبه ۱۰ تا ۱۴
+          تحویل اوکالا (شبکه افق کوروش): پنجشنبه ۱۰ تا ۱۴ · ارسال رایگان
         </small>
       </div>
 

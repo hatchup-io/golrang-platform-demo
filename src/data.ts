@@ -46,11 +46,14 @@ export const wallet = {
 }
 
 // ── سبد پیشنهادی اولیه (مرحله سوم: ساخت پیشنهاد) ───────────────────────────
+// همه اقلام از اوکالا (بازوی آنلاین شبکه افق کوروش) تأمین می‌شوند.
+// برندهای اکتیو، فامیلا، اویلا، مرسی، اوه و ساحل کنار از خانواده گلرنگ‌اند؛
+// کاله، تلاونگ و گلستان برندهای پرفروش ایرانی در دسته‌هایی هستند که گلرنگ تولید نمی‌کند.
 export const frequentItems: Product[] = [
-  { id: 'rice', title: 'برنج ایرانی هاشمی ۵ کیلوگرم', brand: 'اوکالا سلکت', service: 'اوکالا', price: 780_000, qty: 1, category: 'staple', tag: 'frequent' },
-  { id: 'oil', title: 'روغن سرخ‌کردنی ۱٫۸ لیتر', service: 'اوکالا', price: 165_000, qty: 1, category: 'grocery', tag: 'frequent' },
-  { id: 'milk', title: 'شیر پرچرب ۱ لیتری (بسته ۶ عددی)', service: 'اوکالا', price: 210_000, qty: 1, category: 'dairy', tag: 'frequent' },
-  { id: 'egg', title: 'تخم‌مرغ بسته ۲۰ عددی', service: 'اوکالا', price: 190_000, qty: 1, category: 'protein', tag: 'frequent' },
+  { id: 'rice', title: 'برنج ایرانی طارم ساحل کنار ۵ کیلوگرم', brand: 'ساحل کنار', service: 'اوکالا', price: 780_000, qty: 1, category: 'staple', tag: 'frequent' },
+  { id: 'oil', title: 'روغن سرخ‌کردنی فامیلا ۱٫۸ لیتر', brand: 'فامیلا', service: 'اوکالا', price: 165_000, qty: 1, category: 'grocery', tag: 'frequent' },
+  { id: 'milk', title: 'شیر پرچرب کاله ۱ لیتری (بسته ۶ عددی)', brand: 'کاله', service: 'اوکالا', price: 210_000, qty: 1, category: 'dairy', tag: 'frequent' },
+  { id: 'egg', title: 'تخم‌مرغ تلاونگ بسته ۲۰ عددی', brand: 'تلاونگ', service: 'اوکالا', price: 190_000, qty: 1, category: 'protein', tag: 'frequent' },
   { id: 'dish', title: 'مایع ظرفشویی اکتیو ۳٫۵ لیتر', brand: 'اکتیو', service: 'اوکالا', price: 145_000, qty: 1, category: 'hygiene', tag: 'frequent' },
   { id: 'tissue', title: 'دستمال کاغذی مرسی (بسته ۶ قلو)', brand: 'مرسی', service: 'اوکالا', price: 132_000, qty: 1, category: 'hygiene', tag: 'frequent' },
 ]
@@ -65,13 +68,13 @@ export const economicAlternatives: {
   {
     replaces: 'rice',
     from: frequentItems[0],
-    to: { id: 'rice-alt', title: 'برنج ایرانی طارم درجه ۲ ۵ کیلوگرم', service: 'اوکالا', price: 620_000, qty: 1, category: 'staple', tag: 'alt', note: 'جایگزین اقتصادی' },
+    to: { id: 'rice-alt', title: 'برنج ایرانی اسپه درجه ۲ ۵ کیلوگرم', brand: 'اسپه', service: 'اوکالا', price: 620_000, qty: 1, category: 'staple', tag: 'alt', note: 'جایگزین اقتصادی' },
     saving: 160_000,
   },
   {
     replaces: 'oil',
     from: frequentItems[1],
-    to: { id: 'oil-alt', title: 'روغن مایع آفتابگردان اقتصادی ۱٫۸ لیتر', service: 'اوکالا', price: 128_000, qty: 1, category: 'grocery', tag: 'alt', note: 'جایگزین اقتصادی' },
+    to: { id: 'oil-alt', title: 'روغن مایع آفتابگردان اویلا ۱٫۸ لیتر', brand: 'اویلا', service: 'اوکالا', price: 128_000, qty: 1, category: 'grocery', tag: 'alt', note: 'جایگزین اقتصادی' },
     saving: 37_000,
   },
 ]
@@ -91,8 +94,8 @@ export const campaignItem: Product = {
 
 // اقلامی که احتمالاً هنوز در خانه موجودند و فعالانه حذف شده‌اند
 export const atHomeItems: Product[] = [
-  { id: 'salt', title: 'نمک یددار ۵۰۰ گرم', service: 'اوکالا', price: 22_000, qty: 1, category: 'grocery', tag: 'athome', note: 'احتمالاً موجود است' },
-  { id: 'turmeric', title: 'زردچوبه ۱۰۰ گرم', service: 'اوکالا', price: 35_000, qty: 1, category: 'grocery', tag: 'athome', note: 'احتمالاً موجود است' },
+  { id: 'salt', title: 'نمک یددار گلها ۵۰۰ گرم', brand: 'گلها', service: 'اوکالا', price: 22_000, qty: 1, category: 'grocery', tag: 'athome', note: 'احتمالاً موجود است' },
+  { id: 'turmeric', title: 'زردچوبه گلستان ۱۰۰ گرم', brand: 'گلستان', service: 'اوکالا', price: 35_000, qty: 1, category: 'grocery', tag: 'athome', note: 'احتمالاً موجود است' },
 ]
 
 // ── سناریوی مهمانی (مرحله چهارم: گفت‌وگو) ──────────────────────────────────
@@ -104,11 +107,11 @@ export const guestMenu = {
   serves: 6,
   prepMinutes: 75,
   ingredients: [
-    { id: 'chicken', title: 'مرغ تازه ۳ کیلوگرم', service: 'اوکالا', price: 540_000, qty: 1, category: 'protein' as Category, tag: 'guest' as const },
-    { id: 'barberry', title: 'زرشک پفکی ۲۰۰ گرم', service: 'اوکالا', price: 96_000, qty: 1, category: 'grocery' as Category, tag: 'guest' as const },
-    { id: 'saffron', title: 'زعفران سرگل ۱ مثقال', service: 'اوکالا', price: 320_000, qty: 1, category: 'grocery' as Category, tag: 'guest' as const },
+    { id: 'chicken', title: 'مرغ کامل تازه پویا پروتئین ۳ کیلوگرم', brand: 'پویا پروتئین', service: 'اوکالا', price: 540_000, qty: 1, category: 'protein' as Category, tag: 'guest' as const },
+    { id: 'barberry', title: 'زرشک پفکی اعلا ۲۰۰ گرم', service: 'اوکالا', price: 96_000, qty: 1, category: 'grocery' as Category, tag: 'guest' as const },
+    { id: 'saffron', title: 'زعفران سرگل گلستان ۱ مثقال', brand: 'گلستان', service: 'اوکالا', price: 320_000, qty: 1, category: 'grocery' as Category, tag: 'guest' as const },
     { id: 'salad', title: 'سبزیجات سالاد شیرازی', service: 'اوکالا', price: 85_000, qty: 1, category: 'grocery' as Category, tag: 'guest' as const },
-    { id: 'drink', title: 'دوغ محلی ۱٫۵ لیتر (۲ عدد)', service: 'اوکالا', price: 110_000, qty: 1, category: 'grocery' as Category, tag: 'guest' as const },
+    { id: 'drink', title: 'دوغ کاله ۱٫۵ لیتر (۲ عدد)', brand: 'کاله', service: 'اوکالا', price: 110_000, qty: 1, category: 'grocery' as Category, tag: 'guest' as const },
   ],
   readyItem: { id: 'dessert', title: 'دسر ژله‌ای مجلسی (۶ نفره)', service: 'تپسی‌فود', price: 180_000, qty: 1, category: 'ready' as Category, tag: 'guest' as const, note: 'آماده — از تپسی‌فود' },
 }
