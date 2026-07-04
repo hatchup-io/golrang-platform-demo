@@ -1,0 +1,848 @@
+/* ═══════════════════════════════════════════════════════════════════════
+   دموی پلتفرم هوشمند گلرنگ — سیستم طراحی
+   ═══════════════════════════════════════════════════════════════════════ */
+
+:root {
+  --c-primary: #6a45f3;
+  --c-primary-2: #9b5cf6;
+  --c-green: #17b981;
+  --c-orange: #ff8a3d;
+  --c-pink: #ff4d8d;
+  --c-blue: #3d8bff;
+  --c-yellow: #f7b93b;
+
+  --bg: #eef0f8;
+  --bg-2: #e6e8f4;
+  --surface: #ffffff;
+  --surface-2: #f7f8fc;
+  --ink: #1b1930;
+  --ink-2: #4a4863;
+  --muted: #8b89a3;
+  --line: #e9e9f2;
+  --shadow-sm: 0 2px 8px rgba(27, 25, 48, 0.06);
+  --shadow: 0 12px 32px rgba(27, 25, 48, 0.1);
+  --shadow-lg: 0 24px 60px rgba(27, 25, 48, 0.18);
+  --radius: 18px;
+  --radius-sm: 12px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+  background: radial-gradient(circle at 15% 0%, #f4ecff 0%, var(--bg) 42%, var(--bg-2) 100%);
+  color: var(--ink);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.65;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+}
+
+/* ── چیدمان اصلی ───────────────────────────────────────────────────────── */
+.app {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px clamp(16px, 4vw, 48px);
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.brand-mark {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: conic-gradient(from 210deg, var(--c-pink), var(--c-orange), var(--c-yellow), var(--c-green), var(--c-blue), var(--c-primary), var(--c-pink));
+  box-shadow: 0 6px 16px rgba(106, 69, 243, 0.35);
+  position: relative;
+}
+.brand-mark::after {
+  content: '';
+  position: absolute;
+  inset: 9px;
+  border-radius: 6px;
+  background: var(--surface);
+}
+.brand-text b {
+  font-size: 16px;
+  font-weight: 800;
+  display: block;
+  line-height: 1.3;
+}
+.brand-text span {
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+.header-badge {
+  font-size: 12px;
+  color: var(--c-primary);
+  background: #f0ebff;
+  border: 1px solid #e2d8ff;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ── نوار مراحل ────────────────────────────────────────────────────────── */
+.stepper {
+  display: flex;
+  gap: 6px;
+  padding: 14px clamp(16px, 4vw, 48px);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.stepper::-webkit-scrollbar {
+  display: none;
+}
+.step-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: 7px 12px 7px 14px;
+  font-size: 12.5px;
+  color: var(--ink-2);
+  white-space: nowrap;
+  transition: all 0.22s ease;
+  flex: 0 0 auto;
+}
+.step-pill .num {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  background: var(--bg-2);
+  color: var(--ink-2);
+}
+.step-pill.active {
+  border-color: var(--c-primary);
+  background: var(--c-primary);
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(106, 69, 243, 0.32);
+}
+.step-pill.active .num {
+  background: rgba(255, 255, 255, 0.25);
+  color: #fff;
+}
+.step-pill.done {
+  border-color: #d8f3e8;
+  background: #eafaf3;
+  color: var(--c-green);
+}
+.step-pill.done .num {
+  background: var(--c-green);
+  color: #fff;
+}
+
+/* ── بدنه: دو ستون ─────────────────────────────────────────────────────── */
+.stage {
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 384px;
+  gap: clamp(20px, 3vw, 44px);
+  padding: clamp(16px, 3vw, 40px) clamp(16px, 4vw, 48px) 120px;
+  align-items: start;
+  max-width: 1240px;
+  width: 100%;
+  margin: 0 auto;
+}
+.stage-main {
+  display: flex;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* ── پنل روایت ─────────────────────────────────────────────────────────── */
+.narration {
+  position: sticky;
+  top: 96px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  animation: fadeUp 0.4s ease;
+}
+.narration .eyebrow {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--c-primary);
+  letter-spacing: 0.02em;
+}
+.narration h2 {
+  margin: 6px 0 4px;
+  font-size: 22px;
+  font-weight: 800;
+}
+.narration .lead {
+  color: var(--ink-2);
+  font-size: 14px;
+  margin: 0 0 18px;
+}
+.narration ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.narration ul li {
+  display: flex;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--ink-2);
+}
+.narration ul li::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 7px;
+  height: 7px;
+  margin-top: 8px;
+  border-radius: 50%;
+  background: var(--c-primary);
+}
+.callout {
+  margin-top: 18px;
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  background: linear-gradient(135deg, #f3efff, #fdf1f6);
+  border: 1px solid #ece5ff;
+  font-size: 13px;
+  color: var(--ink-2);
+}
+.callout b {
+  color: var(--ink);
+}
+
+/* ── قاب موبایل ────────────────────────────────────────────────────────── */
+.phone {
+  width: 390px;
+  max-width: 100%;
+  height: 748px;
+  background: #14121f;
+  border-radius: 46px;
+  padding: 13px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  animation: fadeUp 0.45s ease;
+}
+.phone::before {
+  content: '';
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 118px;
+  height: 26px;
+  background: #14121f;
+  border-radius: 999px;
+  z-index: 5;
+}
+.phone-screen {
+  width: 100%;
+  height: 100%;
+  background: var(--surface-2);
+  border-radius: 34px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 26px 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--ink);
+  flex: 0 0 auto;
+}
+.status-bar .dots {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+.status-bar .dots i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--ink);
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.screen-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px 18px 24px;
+  scrollbar-width: thin;
+}
+.screen-body::-webkit-scrollbar {
+  width: 4px;
+}
+.screen-body::-webkit-scrollbar-thumb {
+  background: #d5d4e2;
+  border-radius: 4px;
+}
+
+.app-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 4px 14px;
+}
+.app-topbar .hi b {
+  font-size: 16px;
+  font-weight: 800;
+}
+.app-topbar .hi span {
+  font-size: 12px;
+  color: var(--muted);
+}
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-pink));
+  color: #fff;
+  display: grid;
+  place-items: center;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+/* ── کارت‌های عمومی درون اپ ────────────────────────────────────────────── */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow-sm);
+  padding: 14px;
+}
+.card + .card {
+  margin-top: 12px;
+}
+.card-title {
+  font-size: 13px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+.chip.green { background: #e7f8f1; color: var(--c-green); }
+.chip.orange { background: #fff1e6; color: #e56a1c; }
+.chip.pink { background: #ffe9f1; color: var(--c-pink); }
+.chip.violet { background: #f0ebff; color: var(--c-primary); }
+.chip.blue { background: #e8f1ff; color: var(--c-blue); }
+.chip.gray { background: var(--bg-2); color: var(--muted); }
+
+/* ── آیتم محصول ────────────────────────────────────────────────────────── */
+.product {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
+}
+.product:last-child { border-bottom: 0; }
+.product .thumb {
+  flex: 0 0 auto;
+  width: 42px;
+  height: 42px;
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+}
+.product .meta {
+  flex: 1;
+  min-width: 0;
+}
+.product .meta b {
+  font-size: 12.5px;
+  font-weight: 600;
+  display: block;
+  line-height: 1.5;
+}
+.product .meta small {
+  font-size: 11px;
+  color: var(--muted);
+}
+.product .price {
+  font-size: 12.5px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.product.removed {
+  opacity: 0.55;
+}
+.product.removed .meta b {
+  text-decoration: line-through;
+  text-decoration-color: var(--muted);
+}
+
+.cat-staple { background: #fff5e2; }
+.cat-grocery { background: #eafaf1; }
+.cat-hygiene { background: #f0ebff; }
+.cat-dairy { background: #e8f1ff; }
+.cat-protein { background: #ffeef0; }
+.cat-ready { background: #fdeefb; }
+
+/* ── گفت‌وگوی دستیار ───────────────────────────────────────────────────── */
+.bubble {
+  max-width: 84%;
+  padding: 11px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  line-height: 1.7;
+  animation: fadeUp 0.4s ease both;
+}
+.bubble.ai {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-top-right-radius: 4px;
+  margin-inline-start: auto;
+  box-shadow: var(--shadow-sm);
+}
+.bubble.user {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  border-top-left-radius: 4px;
+  margin-inline-end: auto;
+}
+.chat {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.voice-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: flex-end;
+  margin-top: 2px;
+}
+.wave {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+  height: 22px;
+}
+.wave i {
+  width: 3px;
+  border-radius: 3px;
+  background: var(--c-primary);
+  animation: wave 1s ease-in-out infinite;
+}
+.mic {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--c-pink), var(--c-orange));
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-size: 16px;
+}
+
+/* ── نوار پیشرفت هدف / بودجه ───────────────────────────────────────────── */
+.progress {
+  height: 9px;
+  border-radius: 999px;
+  background: var(--bg-2);
+  overflow: hidden;
+  margin: 8px 0 4px;
+}
+.progress > i {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--c-green), var(--c-blue));
+  transition: width 0.8s ease;
+}
+.progress.warn > i {
+  background: linear-gradient(90deg, var(--c-yellow), var(--c-orange));
+}
+
+/* ── نسخه‌های سبد ──────────────────────────────────────────────────────── */
+.variants {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.variant {
+  border: 1.5px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 13px;
+  transition: all 0.2s ease;
+  background: var(--surface);
+}
+.variant.sel {
+  border-color: var(--c-primary);
+  box-shadow: 0 8px 22px rgba(106, 69, 243, 0.16);
+}
+.variant .v-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.variant .v-head b {
+  font-size: 14px;
+  font-weight: 800;
+}
+.variant .v-total {
+  font-size: 14px;
+  font-weight: 800;
+}
+.variant .v-reasons {
+  margin: 8px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.variant .v-reasons li {
+  font-size: 11.5px;
+  color: var(--muted);
+  display: flex;
+  gap: 6px;
+}
+.variant .v-reasons li::before {
+  content: '✓';
+  color: var(--c-green);
+  font-weight: 700;
+}
+
+/* ── دکمه اقدام درون اپ ────────────────────────────────────────────────── */
+.cta {
+  width: 100%;
+  border: 0;
+  border-radius: 14px;
+  padding: 14px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  box-shadow: 0 10px 24px rgba(106, 69, 243, 0.3);
+  margin-top: 14px;
+}
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 2px 0;
+}
+.total-row b { font-size: 15px; font-weight: 800; }
+.total-row span { font-size: 12px; color: var(--muted); }
+
+/* ── نوار پایین (ناوبری مراحل) ─────────────────────────────────────────── */
+.footer-nav {
+  position: fixed;
+  bottom: 0;
+  inset-inline: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  border-top: 1px solid var(--line);
+  z-index: 30;
+}
+.nav-btn {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 12px;
+  padding: 11px 20px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.18s ease;
+}
+.nav-btn:hover:not(:disabled) { transform: translateY(-1px); }
+.nav-btn.primary {
+  background: linear-gradient(135deg, var(--c-primary), var(--c-primary-2));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 10px 22px rgba(106, 69, 243, 0.32);
+}
+.nav-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.nav-progress {
+  font-size: 12.5px;
+  color: var(--muted);
+  min-width: 116px;
+  text-align: center;
+}
+
+/* ═══ داشبورد سازمانی ═══════════════════════════════════════════════════ */
+.dashboard {
+  width: 100%;
+  max-width: 1080px;
+  background: var(--surface);
+  border-radius: var(--radius);
+  border: 1px solid var(--line);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: fadeUp 0.45s ease;
+}
+.dash-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  padding: 22px 26px;
+  background: linear-gradient(120deg, #221a45, #3a2470);
+  color: #fff;
+}
+.dash-head h3 {
+  margin: 0;
+  font-size: 19px;
+  font-weight: 800;
+}
+.dash-head .sub {
+  font-size: 12.5px;
+  opacity: 0.8;
+  margin-top: 3px;
+}
+.dash-head .env {
+  font-size: 11.5px;
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 6px 12px;
+  border-radius: 999px;
+}
+.dash-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  padding: 22px 26px 8px;
+}
+.kpi {
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 15px;
+}
+.kpi .k-label {
+  font-size: 12px;
+  color: var(--muted);
+}
+.kpi .k-value {
+  font-size: 24px;
+  font-weight: 800;
+  margin-top: 6px;
+  line-height: 1.2;
+}
+.kpi .k-value .unit { font-size: 13px; font-weight: 600; color: var(--ink-2); }
+.kpi .k-delta {
+  font-size: 11.5px;
+  font-weight: 700;
+  margin-top: 4px;
+}
+.k-delta.up { color: var(--c-green); }
+
+.dash-cols {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 16px;
+  padding: 14px 26px 26px;
+}
+.panel {
+  border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+  padding: 18px;
+}
+.panel h4 {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+/* قیف تبدیل */
+.funnel {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.funnel-row {
+  display: grid;
+  grid-template-columns: 96px 1fr auto;
+  gap: 10px;
+  align-items: center;
+  font-size: 12px;
+}
+.funnel-bar {
+  height: 26px;
+  border-radius: 8px;
+  background: linear-gradient(90deg, var(--c-primary), var(--c-primary-2));
+  display: flex;
+  align-items: center;
+  padding-inline-start: 10px;
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  min-width: 40px;
+  transition: width 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.funnel-row .pct { font-weight: 700; color: var(--ink-2); }
+
+/* مقایسه هدف/کنترل */
+.compare-bars {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+  height: 168px;
+  padding: 8px 4px 0;
+  border-bottom: 1px solid var(--line);
+}
+.cbar {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  height: 100%;
+  justify-content: flex-end;
+}
+.cbar .bar {
+  width: 62px;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+  transition: height 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.cbar .bar b {
+  position: absolute;
+  top: -22px;
+  inset-inline: 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 800;
+}
+.cbar.target .bar { background: linear-gradient(180deg, var(--c-primary), var(--c-primary-2)); }
+.cbar.control .bar { background: linear-gradient(180deg, #b9b7cf, #d5d4e2); }
+.cbar .lbl { font-size: 12px; color: var(--ink-2); font-weight: 600; }
+.uplift-note {
+  margin-top: 14px;
+  font-size: 12.5px;
+  background: #eafaf3;
+  border: 1px solid #cdefe0;
+  color: #0b8f66;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-weight: 600;
+}
+
+/* آفر A/B */
+.offer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--line);
+}
+.offer:last-child { border-bottom: 0; }
+.offer .o-rate { font-size: 16px; font-weight: 800; }
+.offer .winner {
+  font-size: 11px;
+  color: var(--c-green);
+  font-weight: 700;
+}
+
+.full-note {
+  padding: 16px 26px 24px;
+  font-size: 13px;
+  color: var(--ink-2);
+  background: var(--surface-2);
+  border-top: 1px solid var(--line);
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+}
+.full-note::before {
+  content: '◆';
+  color: var(--c-primary);
+}
+
+/* ── انیمیشن‌ها ────────────────────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes wave {
+  0%, 100% { height: 6px; }
+  50% { height: 20px; }
+}
+
+/* ── واکنش‌گرایی ───────────────────────────────────────────────────────── */
+@media (max-width: 940px) {
+  .stage {
+    grid-template-columns: 1fr;
+  }
+  .narration {
+    position: static;
+    order: -1;
+  }
+  .dash-grid { grid-template-columns: repeat(2, 1fr); }
+  .dash-cols { grid-template-columns: 1fr; }
+}
+@media (max-width: 480px) {
+  .phone { height: 700px; }
+  .dash-grid { grid-template-columns: 1fr; }
+}
